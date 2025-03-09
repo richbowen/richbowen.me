@@ -1,11 +1,21 @@
 <template>
   <v-main>
-    <router-view />
+    <v-container>
+      <div class="text-h4 my-4">
+        <router-link to="/" class="text-decoration-none text-black">Richard Bowen</router-link>
+      </div>
+      <v-toolbar>
+        <v-btn text to="/about" class="mr-3">About</v-btn>
+        <v-btn text to="/blog" class="mr-3">Blog</v-btn>
+        <v-btn text to="/projects">Projects</v-btn>
+      </v-toolbar>
+      <router-view />
+    </v-container>
   </v-main>
 
-  <AppFooter />
+  <!--<AppFooter /> -->
 </template>
 
 <script lang="ts" setup>
-  //
+//
 </script>
