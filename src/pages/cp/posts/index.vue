@@ -7,7 +7,7 @@
     </v-toolbar>
     <v-list>
       <v-list-item v-for="post in store.posts" :key="post.id" :to="`/cp/posts/${post.id}/edit`" :title="post.title"
-        :subtitle="post.content" key="post.id">
+        :subtitle="post.content">
         <template v-slot:append>
           <v-btn :to="`/cp/posts/${post.id}/edit`" icon="mdi-pencil" size="small" class="mr-2"></v-btn>
           <v-btn @click.stop="deletePost(post.id)" icon="mdi-delete" size="small" flat></v-btn>

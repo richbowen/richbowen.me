@@ -2,14 +2,8 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import Database from 'sql.js';
-
-interface Post {
-  id: number;
-  title: string;
-  author: string;
-  date: string;
-  content: string;
-}
+import type { Post } from '@/types';
+import { slugify } from '@/utils';
 
 export const useBlogStore = defineStore('blog', () => {
   const posts = ref<Post[]>([]);
@@ -31,6 +25,7 @@ export const useBlogStore = defineStore('blog', () => {
       db.run(`
         CREATE TABLE IF NOT EXISTS posts (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
+          slug TEXT,
           title TEXT,
           author TEXT,
           date TEXT,
@@ -54,6 +49,7 @@ export const useBlogStore = defineStore('blog', () => {
         posts.value = values.map((row) => {
           const post: Post = {
             id: row[columns.indexOf('id')] as number,
+            'slug': row[columns.indexOf('slug')] as string,
             title: row[columns.indexOf('title')] as string,
             author: row[columns.indexOf('author')] as string,
             date: row[columns.indexOf('date')] as string,
@@ -79,8 +75,8 @@ export const useBlogStore = defineStore('blog', () => {
     if (!db) return;
     try {
       db.run(
-        'INSERT INTO posts (title, author, date, content) VALUES (?, ?, ?, ?)',
-        [post.title, post.author, post.date, post.content]
+        'INSERT INTO posts (title, slug, author, date, content) VALUES (?, ?, ?, ?, ?)',
+        [post.title, slugify(post.title), post.author, post.date, post.content]
       );
       await loadPostsFromDatabase();
       saveDatabaseToLocalStorage();
@@ -93,8 +89,8 @@ export const useBlogStore = defineStore('blog', () => {
     if (!db) return;
     try {
       db.run(
-        'UPDATE posts SET title = ?, author = ?, date = ?, content = ? WHERE id = ?',
-        [updatedPost.title, updatedPost.author, updatedPost.date, updatedPost.content, id]
+        'UPDATE posts SET title = ?, slug = ?, author = ?, date = ?, content = ? WHERE id = ?',
+        [updatedPost.title, slugify(updatedPost.title), updatedPost.author, updatedPost.date, updatedPost.content, id]
       );
       await loadPostsFromDatabase();
       saveDatabaseToLocalStorage();

@@ -1,7 +1,7 @@
 <template>
   <BlogPostForm />
 </template>
-<script setup lang="ts">
+<script setup>
 import BlogPostForm from "@/components/BlogPostForm.vue";
 </script>
 

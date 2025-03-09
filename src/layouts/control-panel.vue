@@ -17,7 +17,7 @@
       <v-app-bar flat>
         <v-toolbar-title>Control Panel</v-toolbar-title>
         <v-spacer />
-        <v-btn to="/" text>Home</v-btn>
+        <v-btn to="/" variant="text">Home</v-btn>
       </v-app-bar>
       <v-divider></v-divider>
       <v-container>

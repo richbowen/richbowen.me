@@ -11,10 +11,11 @@
   </v-container>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { useBlogStore } from '@/stores/blog';
 import { useRoute } from 'vue-router';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { slugify } from '@/utils';
 
 const store = useBlogStore();
 const route = useRoute();
@@ -22,19 +23,7 @@ const post = ref(null);
 
 onMounted(async () => {
   const posts = store.posts;
-  const foundPost = posts.find((post) => slugify(post.title) === route.params.slug);
-  post.value = foundPost;
+  const foundPost = posts.find((post) => slugify(post.title) === route.params?.slug);
+  post.value = foundPost || null;
 });
-
-function slugify(text: string): string {
-  return text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-')
-    .replace(/^-+/, '')
-    .replace(/-+$/, '');
-}
 </script>

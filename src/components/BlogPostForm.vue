@@ -8,21 +8,23 @@
   </v-container>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { reactive, onMounted } from 'vue';
 import { useBlogStore } from '@/stores/blog';
 import { useRouter, useRoute } from 'vue-router';
+import { slugify } from '@/utils';
 
 const store = useBlogStore();
 const router = useRouter();
 const route = useRoute();
 
-const postId = route.params.id;
+const postId = route.params?.id;
 const isEditing = !!postId;
 
 const post = reactive({
   id: isEditing ? parseInt(postId) : Date.now(),
   title: '',
+  slug: '',
   author: 'Richard Bowen',
   date: new Date().toISOString().substr(0, 10),
   content: '',

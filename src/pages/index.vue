@@ -29,7 +29,7 @@
           </v-list-item>
         </v-list>
         <v-card-actions>
-          <v-btn text to="/blog">All bolg posts</v-btn>
+          <v-btn variant="text" to="/blog">All blog posts</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
