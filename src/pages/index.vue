@@ -1,15 +1,19 @@
 <template>
   <v-row class="mt-4">
     <v-col cols="12" md="8">
-      <v-card class="pa-4">
+      <v-card class="pr-4 pt-4">
         <v-row dense>
-          <v-col cols="12" md="2">
-            <v-img src="@/assets/richbowen.jpeg" alt="Richard Bowen" width="200" rounded inline></v-img>
+          <v-col cols="12" md="3">
+            <v-img src="@/assets/richbowen.png" alt="Richard Bowen" width="300" rounded></v-img>
           </v-col>
-          <v-col cols="12" md="10">
-            <h2 class="text-h5">A digital artisan building great software</h2>
+          <v-col cols="12" md="9">
+            <h2 class="text-h5 pb-2">A digital artisan building great software</h2>
+            <p class="pb-4">
+              I specialize in effective, highly usable product implementation, whether it is an MVP or revamping an
+              existing product.
+            </p>
+            <br />
             <p>
-              I specialize in effective product implementation from MVP to reframing existing product.
               Here, I share my thoughts, projects, and experiences.
             </p>
           </v-col>
@@ -25,9 +29,12 @@
 
       <v-card class="mt-4">
         <v-card-title>Recent Blog Posts</v-card-title>
-        <v-list>
+        <v-list v-if="posts.length > 0">
           <v-list-item v-for="post in posts" :key="post.id" :to="`/blog/${slugify(post.title)}`" :title="post.title">
           </v-list-item>
+        </v-list>
+        <v-list v-else>
+          <v-list-item>No posts yet.</v-list-item>
         </v-list>
         <v-card-actions>
           <v-btn variant="text" to="/blog">All blog posts</v-btn>
@@ -39,6 +46,7 @@
 
 <script lang="ts" setup>
 import { useBlogStore } from '@/stores/blog';
+import { slugify } from '@/utils';
 
 interface Social {
   name: string;
@@ -72,16 +80,4 @@ const socials = ref<Social[]>([
 const store = useBlogStore();
 
 const posts = computed(() => store.posts.slice(0, 3));
-
-function slugify(text: string): string {
-  return text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-')
-    .replace(/^-+/, '')
-    .replace(/-+$/, '');
-}
 </script>
