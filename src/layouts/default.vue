@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <v-container>
-      <div class="text-h4 my-4">
+      <div class="text-h4 my-4 font-weight-bold">
         <router-link to="/" class="text-decoration-none text-black">Richard Bowen</router-link>
       </div>
       <v-toolbar>
