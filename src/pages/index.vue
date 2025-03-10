@@ -1,14 +1,15 @@
 <template>
   <v-row class="mt-4">
     <v-col cols="12" md="8">
-      <v-card>
-        <v-row>
+      <v-card class="pa-4">
+        <v-row dense>
           <v-col cols="12" md="2">
-            <v-img src="@/assets/richbowen.jpeg" alt="Richard Bowen" width="150" rounded></v-img>
+            <v-img src="@/assets/richbowen.jpeg" alt="Richard Bowen" width="200" rounded inline></v-img>
           </v-col>
           <v-col cols="12" md="10">
+            <h2 class="text-h5">A digital artisan building great software</h2>
             <p>
-              Welcome to my blog! I'm Richard Bowen, a passionate writer and developer.
+              I specialize in effective product implementation from MVP to reframing existing product.
               Here, I share my thoughts, projects, and experiences.
             </p>
           </v-col>
