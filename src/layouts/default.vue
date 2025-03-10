@@ -13,7 +13,7 @@
     </v-container>
   </v-main>
 
-  <!--<AppFooter /> -->
+  <AppFooter />
 </template>
 
 <script lang="ts" setup>
